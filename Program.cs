@@ -13,6 +13,7 @@ using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
 
 using ZTEF660CLI.Configuration;
+using ZTEF660CLI.Entities;
 using ZTEF660CLI.Logging;
 using ZTEF660CLI.Service;
 
@@ -45,8 +46,15 @@ namespace ZTEF660CLI
 
             IF660Configurator f660 = serviceProvider.GetService<IF660Configurator>();
             f660.LogIn();
+            
+            Stats stats = f660.GetWanConnectionInfo();
 
             logger.Info($"Application stopped");
+        }
+
+        static void PrintStats(Stats stats)
+        {
+            Console.WriteLine("IP Address".PadRight(21) + stats.IpAddress);
         }
         
         static IConfiguration LoadConfiguration()

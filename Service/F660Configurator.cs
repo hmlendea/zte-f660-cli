@@ -50,6 +50,11 @@ namespace ZTEF660CLI.Service
             processor.LogIn();
         }
 
+        public Stats GetWanConnectionInfo()
+        {
+            return processor.GetWanConnectionInfo();
+        }
+
         IWebDriver SetupDriver()
         {
             ChromeOptions options = new ChromeOptions();
@@ -58,7 +63,7 @@ namespace ZTEF660CLI.Service
 			options.AddArgument("--disable-translate");
 			options.AddArgument("--disable-infobars");
             options.AddArgument("--disable-extensions");
-            options.AddArgument("--headless");
+            //options.AddArgument("--headless");
             options.AddArgument("--disable-gpu");
             options.AddArgument("--window-size=1920,1080");
             options.AddArgument("--start-maximized");
