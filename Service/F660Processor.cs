@@ -8,7 +8,9 @@ namespace ZTEF660CLI.Service
 {
     public sealed class F660Processor : WebProcessor
     {
-        public string Url => "192.168.1.1";
+        public static string BaseUrl => "http://192.168.1.1";
+
+        public static string LoginUrl => BaseUrl;
 
         // TODO: Temporary - remove this after
         readonly IWebDriver driver;
@@ -28,19 +30,16 @@ namespace ZTEF660CLI.Service
 
         public void LogIn()
         {
-            GoToUrl(Url);
+            GoToUrl(LoginUrl);
 
             By usernameSelector = By.Id("Frm_Username");
             By passwordSelector = By.Id("Frm_Password");
+            By loginButtonSelector = By.Id("LoginId");
 
             SetText(usernameSelector, user.Username);
             SetText(passwordSelector, user.Password);
 
-            if (debugSettings.IsCrashScreenshotEnabled)
-            {
-                Screenshot crashScreenshot = ((ITakesScreenshot) driver).GetScreenshot();
-                crashScreenshot.SaveAsFile(debugSettings.CrashScreenshotFilePath);
-            }
+            Click(loginButtonSelector);
         }
     }
 }
