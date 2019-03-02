@@ -15,6 +15,7 @@ using OpenQA.Selenium.Support.UI;
 using ZTEF660CLI.Configuration;
 using ZTEF660CLI.Entities;
 using ZTEF660CLI.Logging;
+using ZTEF660CLI.Menus;
 using ZTEF660CLI.Service;
 
 namespace ZTEF660CLI
@@ -29,25 +30,14 @@ namespace ZTEF660CLI
 
         static void Main(string[] args)
         {
-            IConfiguration config = LoadConfiguration();
+            IOC.SetUp();
 
-            DebugSettings debugSettings = new DebugSettings();
-            config.Bind(nameof(DebugSettings), debugSettings);
-            
-            IServiceProvider serviceProvider = new ServiceCollection()
-                .AddSingleton(debugSettings)
-                .AddSingleton<ILogger, Logger>()
-                .AddSingleton<IF660Configurator, F660Configurator>()
-                .BuildServiceProvider();
-
-            logger = serviceProvider.GetService<ILogger>();
+            logger = IOC.GetService<ILogger>();
 
             logger.Info($"Application started");
-
-            IF660Configurator f660 = serviceProvider.GetService<IF660Configurator>();
-            f660.LogIn();
             
-            Stats stats = f660.GetWanConnectionInfo();
+            AuthenticationMenu authenticationMenu = new AuthenticationMenu();
+            authenticationMenu.Run();
 
             logger.Info($"Application stopped");
         }
@@ -55,13 +45,6 @@ namespace ZTEF660CLI
         static void PrintStats(Stats stats)
         {
             Console.WriteLine("IP Address".PadRight(21) + stats.IpAddress);
-        }
-        
-        static IConfiguration LoadConfiguration()
-        {
-            return new ConfigurationBuilder()
-                .AddJsonFile("appsettings.json", true, true)
-                .Build();
         }
     }
 }

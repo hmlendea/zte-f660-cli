@@ -33,14 +33,8 @@ namespace ZTEF660CLI.Service
             driver = SetupDriver();
         }
 
-        public void LogIn()
+        public void LogIn(User user)
         {
-            User user = new User
-            {
-                Username = PromptForValue(nameof(user.Username)),
-                Password = PromptForValue(nameof(user.Password))
-            };
-
             if (!(processor is null))
             {
                 processor.Dispose();
@@ -63,7 +57,7 @@ namespace ZTEF660CLI.Service
 			options.AddArgument("--disable-translate");
 			options.AddArgument("--disable-infobars");
             options.AddArgument("--disable-extensions");
-            //options.AddArgument("--headless");
+            options.AddArgument("--headless");
             options.AddArgument("--disable-gpu");
             options.AddArgument("--window-size=1920,1080");
             options.AddArgument("--start-maximized");
@@ -77,14 +71,6 @@ namespace ZTEF660CLI.Service
             driver.Manage().Window.Maximize();
 
             return driver;
-        }
-
-        string PromptForValue(string prompt)
-        {
-            Console.Write($"Enter the '{prompt}': ");
-            string value = Console.ReadLine();
-
-            return value;
         }
     }
 }

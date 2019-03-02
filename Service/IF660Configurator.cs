@@ -8,7 +8,7 @@ namespace ZTEF660CLI.Service
     {
         bool IsRunning { get; }
 
-        void LogIn();
+        void LogIn(User user);
 
         Stats GetWanConnectionInfo();
     }
