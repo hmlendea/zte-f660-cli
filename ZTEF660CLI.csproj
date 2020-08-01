@@ -20,10 +20,13 @@
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.2.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="NuciCLI" Version="1.1.1.1" />
-    <PackageReference Include="NuciCLI.Menus" Version="1.1.1" />
     <PackageReference Include="NuciWeb" Version="1.1.1" />
     <PackageReference Include="Selenium.Support" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver" Version="3.14.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../nucicli/NuciCLI.Menus/NuciCLI.Menus.csproj" />
   </ItemGroup>
 
   <ItemGroup>

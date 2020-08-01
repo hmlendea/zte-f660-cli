@@ -31,8 +31,7 @@ namespace ZTEF660CLI.Menus
             user.Username = NuciConsole.ReadLine("Username = ");
             user.Password = NuciConsole.ReadLine("Password = ");
 
-            MainMenu mainMenu = new MainMenu(user);
-            mainMenu.Run();
+            MenuManager.Instance.OpenMenu(typeof(MainMenu), user);
         }
     }
 }

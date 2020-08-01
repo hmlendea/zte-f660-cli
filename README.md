@@ -2,4 +2,6 @@
 
 # ZTE F660 CLI
 
+PROJECT UNFINISHED AND DISCONTINUED
+
 Command-line interface to configure the ZTE F660 Router

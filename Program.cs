@@ -8,6 +8,8 @@ using System.Threading;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
+using NuciCLI.Menus;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Support.UI;
@@ -36,8 +38,7 @@ namespace ZTEF660CLI
 
             logger.Info($"Application started");
             
-            AuthenticationMenu authenticationMenu = new AuthenticationMenu();
-            authenticationMenu.Run();
+            MenuManager.Instance.OpenMenu(typeof(AuthenticationMenu));
 
             logger.Info($"Application stopped");
         }
